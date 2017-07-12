@@ -1,4 +1,5 @@
 defmodule InfoSys do
+  require Logger
   @backends [InfoSys.Wolfram]
 
   defmodule Result do
@@ -11,7 +12,7 @@ defmodule InfoSys do
 
   def compute(query, opts \\ []) do
     limit = opts[:limit] || 10
-    backends = opts[:backend] || @backends
+    backends = opts[:backends] || @backends
 
     backends
     |> Enum.map(&spawn_query(&1, query, limit))
